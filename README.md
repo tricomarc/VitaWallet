@@ -39,7 +39,7 @@ Asegúrate de tener instalado:
 
 1.  **Clona** el repositorio:
     ```bash
-    git clone [https://aws.amazon.com/es/what-is/repo/](https://aws.amazon.com/es/what-is/repo/)
+    git clone https://github.com/tricomarc/VitaWallet.git
     cd VITAWALLET-TEST
     ```
 
@@ -57,7 +57,10 @@ Asegúrate de tener instalado:
 
 ### 3. Ejecución de las Pruebas
 
-Para ejecutar todas las pruebas en el directorio `test/`:
+Para ejecutar todas las pruebas en el directorio y generar reporte html:
 
 ```bash
-pytest
+pytest -v --html=report.html
+
+
+

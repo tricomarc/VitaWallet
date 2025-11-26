@@ -3,8 +3,9 @@
 import time
 import pytest
 from pages.login_page import LoginPage
+from pages.cripto_page import CriptoPage 
 from pages.base_page import BasePage
-from data.config import REGISTER_URL
+from data.config import REGISTER_URL, USER, PASSWORD
 import random
 import string
 
@@ -26,20 +27,18 @@ class TestVitaWalletFlows:
 
     def test_01_intercambio_crypto_a_USDT(self, driver_setup):
         """
-        Caso de Prueba: Registro de usuario Argentino y simulación de verificación.
+        Caso de Prueba: Flujo intercambio cripto moneda, de peso Argentino a USD Tether.
         """
         driver = driver_setup
         login_page = LoginPage(driver)
+        cripto_page = CriptoPage(driver)
         
         # 1. Navegar a la página de registro
         login_page.navigate(REGISTER_URL)
         
-        
         # 2. Registrar el nuevo usuario
-        login_page.login('mlazorc@gmail.com', 'Test*5915')
-        time.sleep(5)
-        login_page.click(login_page.div_Menu, 10)
-        time.sleep(3)
-        #login_page.take_screenshot()
+        login_page.login(USER, PASSWORD)
+        cripto_page.intercambioCripto("USD")
+      
 
         

@@ -14,14 +14,11 @@ class BasePage:
     
     def __init__(self, driver):
         self.driver = driver
-        # Aumentamos la espera a 15 segundos para más robustez en la etapa
         self.wait = WebDriverWait(self.driver, 15)
 
     @classmethod
     def setup_driver(cls):
         """Inicializa el WebDriver usando webdriver-manager."""
-        
-        
         chrome_options = Options()
 
         mobile_emulation = {
@@ -55,10 +52,12 @@ class BasePage:
     
     def click(self, by_locator, MAX_TIMEOUT):
         """Espera a que el elemento sea clickeable y luego hace click."""
-        element = self.wait.until(EC.element_to_be_clickable(by_locator))
+        wait = WebDriverWait(self.driver, MAX_TIMEOUT)
+        element = wait.until(EC.element_to_be_clickable(by_locator))
         element.click()
     
     def switchToIframe(self):
+        """Cambia al iframe de recaptcha"""
         self.driver.switch_to.frame(0)
 
     def switch_to_default_content(self):
@@ -72,32 +71,20 @@ class BasePage:
         element.send_keys(text)
 
     def wait_until_text_contains(self, by_locator, expected_text, timeout=None):
-        """
-        [NUEVO MÉTODO] Espera hasta que el texto esperado esté presente en el elemento.
-        Útil para validar mensajes de éxito o estados.
-        """
+        """Espera hasta que el texto esperado esté presente en el elemento."""
         wait_obj = self._get_wait(timeout)
         try:
-            # text_to_be_present_in_element comprueba si el texto está contenido
             wait_obj.until(EC.text_to_be_present_in_element(by_locator, expected_text))
-            # Si pasa, retornamos el elemento por si se necesita leer su texto completo
             return self.find_element(by_locator)
-        except TimeoutException:  # pyright: ignore[reportUndefinedVariable]
+        except TimeoutException:
             current_timeout = timeout if timeout is not None else self.default_timeout
             print(f"Error: El texto '{expected_text}' no apareció en el elemento {by_locator} dentro de {current_timeout}s.")
             raise
     
     def handle_native_alert(self, action="accept", wait_time=5):
-        """
-        Maneja pop-ups de alerta nativa del navegador (como notificaciones, geo-localización, etc.).
-        
-        Args:
-            action (str): 'accept' (para Permitir) o 'dismiss' (para Bloquear).
-            wait_time (int): Tiempo en segundos para esperar la aparición de la alerta.
-        """
+        """Acepta pop-ups de alerta nativa del navegador"""
         print(f"[ALERTA NATIVA] Esperando la alerta nativa por {wait_time}s...")
-        time.sleep(wait_time) # Espera fija, ya que WebDriverWait.until(EC.alert_is_present()) no funciona bien con permisos de notificación.
-
+        time.sleep(wait_time)
         try:
             alert = self.driver.switch_to.alert
             alert_text = alert.text
@@ -120,9 +107,7 @@ class BasePage:
             raise
 
     def wait_for_visibility(self, by_locator, timeout=None):
-      """
-      Espera hasta que el elemento sea visible en la interfaz (no sólo presente en el DOM).
-      """
+      """Espera hasta que el elemento sea visible en la interfaz."""
       wait_obj = self._get_wait(timeout)
       try:
           return wait_obj.until(EC.visibility_of_element_located(by_locator))

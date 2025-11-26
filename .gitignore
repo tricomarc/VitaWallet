@@ -1,0 +1,18 @@
+# Entorno virtual
+venv/
+.env/
+.venv/
+
+# PYTEST
+.cache/
+.pytest_cache/
+
+#allure report
+allure-results/
+allure-report/
+
+reports/
+output/
+tmp/
+temp/
+logs/
