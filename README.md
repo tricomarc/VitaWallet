@@ -3,7 +3,7 @@
 
 ## Descripción del Proyecto
 
-Este repositorio contiene la prueba ténica para la empresa **VitaWallet**. El proyecto está desarrollado en **Python** y utiliza **Pytest** como *framework* principal para la ejecución de pruebas.
+Este repositorio contiene la prueba ténica para la empresa **VitaWallet**. El proyecto está desarrollado en **Python** y utiliza **Pytest** y **Selenium** como *framework* principal para la ejecución de pruebas.
 
 Está diseñado siguiendo un patrón de diseño **Page Object Model (POM)** para mejorar la mantenibilidad y la reutilización del código de prueba.
 
@@ -19,7 +19,6 @@ La estructura de carpetas refleja la organización del *framework* de pruebas:
     * `pages/`: Contiene las clases que implementan el patrón **Page Object Model (POM)**. Cada archivo representa una "página" o componente del sistema bajo prueba.
     * `screenshots/`: Directorio donde se almacenan las **capturas de pantalla** tomadas durante la ejecución de las pruebas (por lo general, capturas de fallos).
     * `test/`: Contiene los **scripts de prueba** que definen los escenarios (*test cases*) utilizando las clases Page Object.
-    * `conftest.py`: Archivo especial de Pytest que contiene *fixtures* compartidas y ganchos (*hooks*) de configuración para toda la *suite* de pruebas.
     * `requirements.txt`: Lista de todas las librerías y dependencias de Python necesarias para ejecutar el proyecto.
 
 ---
@@ -53,7 +52,7 @@ Asegúrate de tener instalado:
     ```bash
     python -m venv venv
     source venv/bin/activate  # En Linux/macOS
-    # venv\Scripts\activate   # En Windows
+    venv\Scripts\activate   # En Windows
     ```
 
 3.  **Instala las dependencias** de Python:
