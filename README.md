@@ -27,13 +27,19 @@ La estructura de carpetas refleja la organización del *framework* de pruebas:
 ## Cómo Empezar
 
 Sigue estos pasos para configurar y ejecutar las pruebas localmente.
-
-### 1. Prerrequisitos
-
 Asegúrate de tener instalado:
 
 * **Python**.
 * **Git** (para clonar el repositorio).
+
+### 1. Tecnologías utlizadas
+|Componente|Versión|
+-----------|-------|
+|**Python**|3.10+|
+|**Pytest**|8.4.2|
+|**Selenium**|4.38.0
+|**WebDriver Manager**|4.0.2
+
 
 ### 2. Instalación
 
@@ -57,10 +63,12 @@ Asegúrate de tener instalado:
 
 ### 3. Ejecución de las Pruebas
 
-Para ejecutar todas las pruebas en el directorio y generar reporte html:
-
+Para ejecutar las pruebas y generar reporte.html
 ```bash
-pytest -v --html=report.html
+    pytest -v --html-report.html
+```
+
+
 
 
 

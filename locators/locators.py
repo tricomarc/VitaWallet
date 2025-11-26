@@ -16,7 +16,12 @@ class CriptoLocators:
     div_Cripto = (By.XPATH, "//div[@class='css-146c3p1 r-bvisft' and contains(text(), 'Cripto')]")
     input_Monto = (By.ID, 'i-bitcoin-amount')
     div_Cross = (By.XPATH,"//div[@class='css-175oi2r r-obd0qt r-6koalj r-17s6mgv']")
-    div_SelectorMoneda = (By.XPATH, "(//div[@class='css-175oi2r r-1mlwlqe r-1udh08x r-417010 r-6zzn7w r-q1j0wu'])[2]")
+    @staticmethod
+    def div_SelectorMoneda(posicion):
+        XPATH_TEMPLATE =  "(//div[@class='css-175oi2r r-1mlwlqe r-1udh08x r-417010 r-6zzn7w r-q1j0wu'])[{posicion}]"
+        dynamic_path = XPATH_TEMPLATE.format(posicion=posicion)
+        return (By.XPATH, dynamic_path)
+    
     @staticmethod
     def div_CriptoType(crypto_value):
         """Retorna localizador formateado según valor ingresado"""

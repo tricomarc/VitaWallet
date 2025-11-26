@@ -1,13 +1,10 @@
-# web-tests/tests/test_vitawallet_flows.py
-
 import time
 import pytest
 from pages.login_page import LoginPage
 from pages.cripto_page import CriptoPage 
 from pages.base_page import BasePage
 from data.config import REGISTER_URL, USER, PASSWORD
-import random
-import string
+
 
 # --- Fixture de Pytest para el ciclo de vida del Driver ---
 
@@ -17,10 +14,6 @@ def driver_setup():
     driver = BasePage.setup_driver()
     yield driver
     driver.quit()
-
-# ----------------------------------------------------
-# Clase de Tests de Vita Wallet
-# ----------------------------------------------------
 
 class TestVitaWalletFlows:
 
@@ -33,12 +26,16 @@ class TestVitaWalletFlows:
         login_page = LoginPage(driver)
         cripto_page = CriptoPage(driver)
         
-        # 1. Navegar a la página de registro
+        # 1. Navegar al Login de VitaWallet
         login_page.navigate(REGISTER_URL)
         
-        # 2. Registrar el nuevo usuario
+        # 2. Login
         login_page.login(USER, PASSWORD)
-        cripto_page.intercambioCripto("USD")
+        
+        #3. Intercambio de moneda Peso Argentino a USDT
+        cripto_page.intercambioCripto("Peso Argentino","  -  USD Tether")
+        time.sleep(5)
+        cripto_page.take_screenshot()
       
 
         
